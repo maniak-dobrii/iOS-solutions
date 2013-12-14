@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="26k-QT-hc9"/>
+                        <viewControllerLayoutGuide type="bottom" id="R6w-KF-j4P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sQc-CU-yrY">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="C1Z-AU-hXp" userLabel="TableHeaderView">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBy-T3-CHf" userLabel="TableHeaderWrapperView">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dynamic text label, sooo long, that it wraps to the next line, just to show that it could have different height." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="TVr-aM-g2s">
+                                                    <rect key="frame" x="20" y="20" width="280" height="82"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.62168145269738839" green="1" blue="0.63894063427190706" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="TVr-aM-g2s" firstAttribute="top" secondItem="hBy-T3-CHf" secondAttribute="top" constant="20" id="8v8-7S-8Gd"/>
+                                                <constraint firstAttribute="bottom" secondItem="TVr-aM-g2s" secondAttribute="bottom" constant="20" id="AF3-Yv-BFT"/>
+                                                <constraint firstItem="TVr-aM-g2s" firstAttribute="leading" secondItem="hBy-T3-CHf" secondAttribute="leading" constant="20" id="TF6-5P-ATk"/>
+                                                <constraint firstAttribute="trailing" secondItem="TVr-aM-g2s" secondAttribute="trailing" constant="20" id="sRM-9z-iln"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="hBy-T3-CHf" secondAttribute="trailing" id="J9h-eW-3J8"/>
+                                        <constraint firstItem="hBy-T3-CHf" firstAttribute="top" secondItem="C1Z-AU-hXp" secondAttribute="top" id="YIz-hb-moL"/>
+                                        <constraint firstItem="hBy-T3-CHf" firstAttribute="leading" secondItem="C1Z-AU-hXp" secondAttribute="leading" id="o06-ky-ft8"/>
+                                    </constraints>
+                                </view>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="WcM-2q-yIl"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="ymU-up-7qf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R6w-KF-j4P" firstAttribute="top" secondItem="sQc-CU-yrY" secondAttribute="bottom" id="AIl-NK-kOa"/>
+                            <constraint firstAttribute="trailing" secondItem="sQc-CU-yrY" secondAttribute="trailing" id="NhN-lN-UtU"/>
+                            <constraint firstItem="sQc-CU-yrY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="XKD-9s-z4w"/>
+                            <constraint firstItem="sQc-CU-yrY" firstAttribute="top" secondItem="26k-QT-hc9" secondAttribute="bottom" id="ad6-6x-JlE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerLabel" destination="TVr-aM-g2s" id="QGV-o5-9mI"/>
+                        <outlet property="tableHeaderViewWrapper" destination="hBy-T3-CHf" id="uui-DK-EMd"/>
+                        <outlet property="tableView" destination="sQc-CU-yrY" id="0o3-Vs-gf2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
