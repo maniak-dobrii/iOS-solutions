@@ -31,6 +31,7 @@
 
 @implementation ViewController
 
+#pragma mark Important stuff
 
 - (void)viewDidLayoutSubviews
 {
@@ -94,6 +95,9 @@
 
 
 
+
+
+#pragma mark -
 // some not interesting UITableView stuff
 #pragma mark UITableView stuff
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
