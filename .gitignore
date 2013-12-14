@@ -17,5 +17,22 @@ DerivedData
 *.hmap
 *.xccheckout
 
+# Generated files
+*.o
+*.pyc
+*.hi
+
+#Python modules
+MANIFEST
+dist/
+build/
+
+# Backup files
+*~.nib
+\#*#
+.#*
+*.swp
+*.un~
+
 #CocoaPods
 Pods
