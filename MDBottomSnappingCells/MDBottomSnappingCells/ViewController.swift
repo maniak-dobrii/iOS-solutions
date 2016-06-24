@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     var collectionView: UICollectionView?
+    var controlButtonsView: UIView?
+    var numberOfItems: Int = 3
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,24 +36,46 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         // This makes items look like UITableViewCells in terms of the width
         return CGSize(width: collectionView.bounds.size.width, height: 44.0)
     }
+
+    // This one is just to make demo more interactive and expressive
+    func updateNumberOfItems(dif: Int) {
+        self.numberOfItems += dif
+
+        if self.numberOfItems < 0 {
+            self.numberOfItems = 0
+        }
+
+        self.collectionView?.reloadData()
+    }
 }
 
 
-// Other irrelevant collection View stuff
+// Other irrelevant collection view stuff
 extension ViewController : UICollectionViewDataSource {
 
+    // Tons of boilerplate configuration, nothing interesting here at all
     func configureOtherCollectionViewStuff() {
+        self.controlButtonsView = UIView(frame: CGRect.zero)
+        self.controlButtonsView?.translatesAutoresizingMaskIntoConstraints = false
+        self.configureControlButtons(inView: self.controlButtonsView!)
+
+        self.view.addSubview(self.controlButtonsView!)
+
         // Add to view hierachy and create constraints
         self.collectionView?.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(self.collectionView!)
 
-        let views = ["collectionView" : self.collectionView!]
+        let views = ["collectionView" : self.collectionView!, "controlButtonsView" : self.controlButtonsView!]
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[collectionView]-0-|",
                                                                 options: NSLayoutFormatOptions(rawValue: 0),
                                                                 metrics: nil,
                                                                 views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[collectionView]-0-|",
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[controlButtonsView]-0-|",
+                                                                options: NSLayoutFormatOptions(rawValue: 0),
+                                                                metrics: nil,
+                                                                views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[collectionView]-[controlButtonsView(60)]-0-|",
                                                                 options: NSLayoutFormatOptions(rawValue: 0),
                                                                 metrics: nil,
                                                                 views: views))
@@ -64,9 +88,49 @@ extension ViewController : UICollectionViewDataSource {
         self.collectionView?.delegate = self
     }
 
+    func configureControlButtons(inView superview:UIView) {
+        let incButton = UIButton(frame: CGRect.zero)
+        incButton.translatesAutoresizingMaskIntoConstraints = false
+        incButton.addTarget(self, action: #selector(ViewController.onIncButtonTapped(_:)), for: .touchUpInside)
+        incButton.setTitle("+", for: UIControlState(rawValue: 0)) // normal is missing, filed rdar://26903126
+        incButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState(rawValue: 0))
+
+        let decButton = UIButton(frame: CGRect.zero)
+        decButton.translatesAutoresizingMaskIntoConstraints = false
+        decButton.addTarget(self, action: #selector(ViewController.onDecButtonTapped(_:)), for: .touchUpInside)
+        decButton.setTitle("-", for: UIControlState(rawValue: 0)) // normal is missing, filed rdar://26903126
+        decButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: UIControlState(rawValue: 0))
+
+        superview.addSubview(incButton)
+        superview.addSubview(decButton)
+
+        let views = ["incButton" : incButton, "decButton" : decButton]
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[incButton(decButton)]-0-[decButton]-0-|",
+                                                                options: NSLayoutFormatOptions(rawValue: 0),
+                                                                metrics: nil,
+                                                                views: views));
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[incButton]-0-|",
+                                                                options: NSLayoutFormatOptions(rawValue: 0),
+                                                                metrics: nil,
+                                                                views: views))
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[decButton]-0-|",
+                                                                options: NSLayoutFormatOptions(rawValue: 0),
+                                                                metrics: nil,
+                                                                views: views))
+    }
+
+    // MARK - Actions
+    func onIncButtonTapped(_ sender: AnyObject?) {
+        updateNumberOfItems(dif: 1)
+    }
+
+    func onDecButtonTapped(_ sender: AnyObject?) {
+        updateNumberOfItems(dif: -1)
+    }
+
     // MARK - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.numberOfItems
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
